@@ -1,0 +1,487 @@
+/* ================================
+   GLOBAL
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(0, 180, 255, 0.12), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(0, 255, 200, 0.08), transparent 30%),
+        #07111f;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+
+/* ================================
+   NAVBAR
+================================ */
+
+.navbar {
+    height: 72px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: rgba(8, 20, 35, 0.85);
+    border-bottom: 1px solid rgba(0, 200, 255, 0.15);
+
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.logo span {
+    color: #00d9ff;
+}
+
+.nav-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: #a9bdcf;
+    font-size: 14px;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+
+    background: #00e6a8;
+    box-shadow: 0 0 12px #00e6a8;
+}
+
+
+/* ================================
+   MAIN
+================================ */
+
+.container {
+    width: 86%;
+    max-width: 1250px;
+    margin: auto;
+}
+
+
+/* ================================
+   HERO
+================================ */
+
+.hero {
+    padding: 65px 0 45px;
+}
+
+.subtitle {
+    color: #00d9ff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: clamp(35px, 5vw, 62px);
+    line-height: 1.05;
+    max-width: 850px;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    display: block;
+    color: #00d9ff;
+}
+
+.description {
+    max-width: 680px;
+    color: #8fa5b8;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+
+/* ================================
+   DASHBOARD
+================================ */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+
+/* ================================
+   CARDS
+================================ */
+
+.card {
+    background: rgba(12, 28, 47, 0.85);
+
+    border: 1px solid rgba(0, 210, 255, 0.13);
+    border-radius: 18px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25);
+
+    backdrop-filter: blur(15px);
+}
+
+.card:hover {
+    border-color: rgba(0, 210, 255, 0.3);
+    transform: translateY(-2px);
+    transition: 0.25s;
+}
+
+
+/* ================================
+   CARD HEADER
+================================ */
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.card-label {
+    color: #00d9ff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    margin-bottom: 7px;
+}
+
+.card h2 {
+    font-size: 23px;
+}
+
+.icon-box {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: rgba(0, 210, 255, 0.1);
+    border: 1px solid rgba(0, 210, 255, 0.15);
+
+    font-size: 20px;
+}
+
+
+/* ================================
+   INPUTS
+================================ */
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+
+    color: #c5d5e3;
+    font-size: 13px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+.input-group label span {
+    color: #71889d;
+    font-weight: 400;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    height: 48px;
+
+    padding: 0 15px;
+
+    border-radius: 9px;
+
+    border: 1px solid #263d53;
+
+    background: #091a2c;
+    color: white;
+
+    outline: none;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.input-group input::placeholder {
+    color: #536a7e;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: #00d9ff;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 217, 255, 0.08);
+}
+
+
+/* ================================
+   PREDICT BUTTON
+================================ */
+
+.predict-btn {
+    width: 100%;
+    height: 54px;
+
+    margin-top: 8px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #00b8ff,
+        #00d9c0
+    );
+
+    color: #03101b;
+
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(0, 200, 255, 0.18);
+
+    transition: 0.25s;
+}
+
+.predict-btn span {
+    margin-right: 7px;
+}
+
+.predict-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(0, 210, 255, 0.3);
+}
+
+.predict-btn:active {
+    transform: scale(0.98);
+}
+
+
+/* ================================
+   RESULT BOX
+================================ */
+
+.result-box {
+    min-height: 220px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 14px;
+
+    background: #091a2c;
+
+    border: 1px dashed #29445a;
+
+    padding: 25px;
+}
+
+.result-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.result-box h3 {
+    font-size: 21px;
+    margin-bottom: 9px;
+}
+
+.result-box p {
+    color: #8197aa;
+    max-width: 330px;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+
+/* ================================
+   PROBABILITY
+================================ */
+
+.probability-section {
+    margin-top: 25px;
+}
+
+.probability-header {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+
+    color: #9eb2c4;
+    font-size: 13px;
+}
+
+.probability-header strong {
+    color: #00d9ff;
+    font-size: 17px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 9px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #14283b;
+}
+
+.progress {
+    height: 100%;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        90deg,
+        #00b8ff,
+        #00e6a8
+    );
+
+    transition: width 0.8s ease;
+}
+
+
+/* ================================
+   SYSTEM INFO
+================================ */
+
+.system-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 10px;
+
+    margin-top: 28px;
+}
+
+.info-item {
+    padding: 15px;
+
+    background: #091a2c;
+
+    border-radius: 10px;
+
+    border: 1px solid #1c3449;
+}
+
+.info-item span {
+    display: block;
+
+    color: #62798d;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 5px;
+}
+
+.info-item strong {
+    font-size: 12px;
+    color: #d7e5ef;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+footer {
+    text-align: center;
+
+    padding: 45px 0 30px;
+
+    color: #52697c;
+
+    font-size: 12px;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 850px) {
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        padding-top: 45px;
+    }
+
+    .container {
+        width: 92%;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .logo {
+        font-size: 19px;
+    }
+
+    .nav-status {
+        font-size: 12px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .system-info {
+        grid-template-columns: 1fr;
+    }
+}

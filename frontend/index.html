@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Predictive Maintenance AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVIGATION BAR
+    ====================================================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            ⚙️ Predictive<span>AI</span>
+        </div>
+
+
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            System Online
+        </div>
+
+
+        <!-- HISTORY BUTTON -->
+
+        <button
+            type="button"
+            class="menu-button"
+            onclick="toggleHistory()">
+
+            📜 History
+
+        </button>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         MAIN CONTAINER
+    ====================================================== -->
+
+    <main class="container">
+
+
+
+        <!-- =================================================
+             HERO SECTION
+        ================================================== -->
+
+        <section class="hero">
+
+            <div>
+
+                <p class="subtitle">
+                    AI-POWERED INDUSTRIAL MONITORING
+                </p>
+
+
+                <h1>
+
+                    Predict Machine Failure
+
+                    <span>
+                        Before It Happens
+                    </span>
+
+                </h1>
+
+
+                <p class="description">
+
+                    Enter machine sensor values and let our AI model
+                    analyze the machine condition and predict possible
+                    failure risk.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             DASHBOARD STATISTICS
+        ================================================== -->
+
+        <section class="stats-grid">
+
+
+            <!-- TOTAL PREDICTIONS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📊
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Predictions
+                    </span>
+
+                    <strong id="totalPredictions">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- NORMAL MACHINES -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✅
+                </div>
+
+                <div>
+
+                    <span>
+                        Normal Machines
+                    </span>
+
+                    <strong id="normalMachines">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FAILURE RISK -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⚠️
+                </div>
+
+                <div>
+
+                    <span>
+                        Failure Risk
+                    </span>
+
+                    <strong id="failureRisk">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- AVERAGE RISK -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🎯
+                </div>
+
+                <div>
+
+                    <span>
+                        Average Risk
+                    </span>
+
+                    <strong id="averageProbability">
+                        0%
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             MAIN DASHBOARD
+        ================================================== -->
+
+        <section class="dashboard">
+
+
+
+            <!-- =================================================
+                 MACHINE INPUT CARD
+            ================================================== -->
+
+            <div class="card input-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <p class="card-label">
+                            MACHINE INPUT
+                        </p>
+
+                        <h2>
+                            Sensor Parameters
+                        </h2>
+
+                    </div>
+
+
+                    <div class="icon-box">
+                        ⚙️
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PREDICTION FORM
+                ================================================== -->
+
+                <form id="predictionForm">
+
+
+
+                    <!-- MACHINE TYPE -->
+
+                    <div class="input-group">
+
+                        <label for="machine_type">
+                            Machine Type
+                        </label>
+
+
+                        <select
+                            id="machine_type"
+                            required>
+
+                            <option value="">
+                                Select Type
+                            </option>
+
+                            <option value="L">
+                                L - Low
+                            </option>
+
+                            <option value="M">
+                                M - Medium
+                            </option>
+
+                            <option value="H">
+                                H - High
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- AIR TEMPERATURE -->
+
+                    <div class="input-group">
+
+                        <label for="air_temperature">
+
+                            Air Temperature
+
+                            <span>
+                                [K]
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            id="air_temperature"
+                            placeholder="Example: 300"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- PROCESS TEMPERATURE -->
+
+                    <div class="input-group">
+
+                        <label for="process_temperature">
+
+                            Process Temperature
+
+                            <span>
+                                [K]
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            id="process_temperature"
+                            placeholder="Example: 310"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- ROTATIONAL SPEED -->
+
+                    <div class="input-group">
+
+                        <label for="rotational_speed">
+
+                            Rotational Speed
+
+                            <span>
+                                [RPM]
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            id="rotational_speed"
+                            placeholder="Example: 1500"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- TORQUE -->
+
+                    <div class="input-group">
+
+                        <label for="torque">
+
+                            Torque
+
+                            <span>
+                                [Nm]
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            id="torque"
+                            placeholder="Example: 50"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- TOOL WEAR -->
+
+                    <div class="input-group">
+
+                        <label for="tool_wear">
+
+                            Tool Wear
+
+                            <span>
+                                [min]
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="number"
+                            id="tool_wear"
+                            placeholder="Example: 180"
+                            required>
+
+                    </div>
+
+
+
+                    <!-- ANALYZE BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="predict-btn">
+
+                        <span>
+                            ⚡
+                        </span>
+
+                        ANALYZE MACHINE
+
+                    </button>
+
+
+                </form>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 AI RESULT CARD
+            ================================================== -->
+
+            <div class="card result-card">
+
+
+                <div class="card-header">
+
+                    <div>
+
+                        <p class="card-label">
+                            AI ANALYSIS
+                        </p>
+
+                        <h2>
+                            Prediction Result
+                        </h2>
+
+                    </div>
+
+
+                    <div class="icon-box">
+                        🤖
+                    </div>
+
+                </div>
+
+
+
+                <!-- INITIAL RESULT -->
+
+                <div
+                    id="resultBox"
+                    class="result-box">
+
+
+                    <div class="result-icon">
+                        🧠
+                    </div>
+
+
+                    <h3>
+                        Ready for Analysis
+                    </h3>
+
+
+                    <p>
+
+                        Enter the machine sensor values
+                        and click
+                        <strong>
+                            Analyze Machine
+                        </strong>.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <!-- FAILURE PROBABILITY -->
+
+                <div class="probability-section">
+
+
+                    <div class="probability-header">
+
+                        <span>
+                            Failure Probability
+                        </span>
+
+
+                        <strong id="probability">
+                            --%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="progress-bar">
+
+                        <div
+                            id="progress"
+                            class="progress"
+                            style="width: 0%">
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- SYSTEM INFORMATION -->
+
+                <div class="system-info">
+
+
+                    <div class="info-item">
+
+                        <span>
+                            MODEL
+                        </span>
+
+                        <strong>
+                            Random Forest
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="info-item">
+
+                        <span>
+                            DATABASE
+                        </span>
+
+                        <strong>
+                            MySQL
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="info-item">
+
+                        <span>
+                            API
+                        </span>
+
+                        <strong>
+                            FastAPI
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             PREDICTION HISTORY
+             
+             Hidden by default.
+             Opens only when History button is clicked.
+        ================================================== -->
+
+        <section
+            id="historySection"
+            class="history-section"
+            style="display: none;">
+
+
+            <!-- HISTORY HEADER -->
+
+            <div class="history-header">
+
+
+                <div>
+
+                    <p class="card-label">
+                        RECENT ACTIVITY
+                    </p>
+
+
+                    <h2>
+                        📜 Prediction History
+                    </h2>
+
+                </div>
+
+
+
+                <div class="history-actions">
+
+
+                    <span class="history-badge">
+
+                        Last 10 Predictions
+
+                    </span>
+
+
+
+                    <!-- CLEAR BUTTON -->
+
+                    <button
+                        type="button"
+                        class="history-clear-btn"
+                        onclick="clearPredictionHistory()">
+
+                        🗑️ Clear
+
+                    </button>
+
+
+
+                    <!-- CLOSE BUTTON -->
+
+                    <button
+                        type="button"
+                        class="history-close-btn"
+                        onclick="toggleHistory()">
+
+                        ✕ Close
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- HISTORY TABLE -->
+
+            <div class="history-table-container">
+
+
+                <table class="history-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Machine
+                            </th>
+
+                            <th>
+                                Air Temp
+                            </th>
+
+                            <th>
+                                Process Temp
+                            </th>
+
+                            <th>
+                                Speed
+                            </th>
+
+                            <th>
+                                Torque
+                            </th>
+
+                            <th>
+                                Tool Wear
+                            </th>
+
+                            <th>
+                                Prediction
+                            </th>
+
+                            <th>
+                                Risk
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody id="historyBody">
+
+
+                        <tr>
+
+                            <td colspan="10">
+
+                                No prediction history available yet.
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer>
+
+            <p>
+
+                Predictive Maintenance AI
+                • Intelligent Industrial Monitoring System
+
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         EXISTING PROJECT JAVASCRIPT
+         
+         IMPORTANT:
+         This remains unchanged.
+    ====================================================== -->
+
+    <script src="js/script.js"></script>
+
+
+
+    <!-- =====================================================
+         HISTORY FUNCTIONALITY
+         
+         Frontend-only addition.
+         Existing API/model is NOT changed.
+    ====================================================== -->
+
+    <script>
+
+
+        /* =================================================
+           STORAGE KEY
+        ================================================== */
+
+        const HISTORY_KEY = "predictiveMaintenanceHistory";
+
+
+
+        /* =================================================
+           GET HISTORY
+        ================================================== */
+
+        function getPredictionHistory() {
+
+            try {
+
+                const saved =
+                    localStorage.getItem(HISTORY_KEY);
+
+                if (!saved) {
+                    return [];
+                }
+
+                const history =
+                    JSON.parse(saved);
+
+                return Array.isArray(history)
+                    ? history
+                    : [];
+
+            } catch (error) {
+
+                console.error(
+                    "History loading error:",
+                    error
+                );
+
+                return [];
+
+            }
+
+        }
+
+
+
+        /* =================================================
+           SAVE HISTORY
+        ================================================== */
+
+        function savePredictionHistory(history) {
+
+            try {
+
+                localStorage.setItem(
+                    HISTORY_KEY,
+                    JSON.stringify(history)
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "History saving error:",
+                    error
+                );
+
+            }
+
+        }
+
+
+
+        /* =================================================
+           TOGGLE HISTORY
+        ================================================== */
+
+        function toggleHistory() {
+
+            const section =
+                document.getElementById(
+                    "historySection"
+                );
+
+
+            if (!section) {
+                return;
+            }
+
+
+            if (
+                section.style.display === "none" ||
+                section.style.display === ""
+            ) {
+
+                section.style.display = "block";
+
+
+                loadHistory();
+
+
+                setTimeout(function () {
+
+                    section.scrollIntoView({
+
+                        behavior: "smooth",
+
+                        block: "start"
+
+                    });
+
+                }, 100);
+
+
+            } else {
+
+                section.style.display = "none";
+
+            }
+
+        }
+
+
+
+        /* =================================================
+           DISPLAY HISTORY
+        ================================================== */
+
+        function loadHistory() {
+
+            const body =
+                document.getElementById(
+                    "historyBody"
+                );
+
+
+            if (!body) {
+                return;
+            }
+
+
+            const history =
+                getPredictionHistory();
+
+
+
+            /* Empty history */
+
+            if (history.length === 0) {
+
+                body.innerHTML = `
+
+                    <tr>
+
+                        <td colspan="10"
+                            style="text-align:center; padding:25px;">
+
+                            📭 No prediction history available yet.
+
+                            <br>
+
+                            <small>
+                                Run a machine analysis to create history.
+                            </small>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+
+                updateStatistics([]);
+
+                return;
+
+            }
+
+
+
+            /* Latest 10 predictions */
+
+            const recent =
+                history.slice(-10).reverse();
+
+
+
+            body.innerHTML =
+                recent.map(function(item, index) {
+
+
+                    const prediction =
+                        item.prediction || "NORMAL";
+
+
+                    const probability =
+                        Number(
+                            item.probability || 0
+                        );
+
+
+                    const isFailure =
+                        prediction
+                            .toString()
+                            .toLowerCase()
+                            .includes("failure") ||
+                        prediction
+                            .toString()
+                            .toLowerCase()
+                            .includes("fail");
+
+
+                    const statusClass =
+                        isFailure
+                            ? "failure"
+                            : "normal";
+
+
+                    return `
+
+                        <tr>
+
+                            <td>
+                                ${history.length - index}
+                            </td>
+
+                            <td>
+                                ${item.machineType || "-"}
+                            </td>
+
+                            <td>
+                                ${item.airTemperature || "-"}
+                            </td>
+
+                            <td>
+                                ${item.processTemperature || "-"}
+                            </td>
+
+                            <td>
+                                ${item.rotationalSpeed || "-"}
+                            </td>
+
+                            <td>
+                                ${item.torque || "-"}
+                            </td>
+
+                            <td>
+                                ${item.toolWear || "-"}
+                            </td>
+
+                            <td>
+
+                                <span
+                                    class="history-status ${statusClass}">
+
+                                    ${isFailure
+                                        ? "⚠️ FAILURE"
+                                        : "✅ NORMAL"}
+
+                                </span>
+
+                            </td>
+
+                            <td>
+                                ${probability.toFixed(1)}%
+                            </td>
+
+                            <td>
+                                ${item.date || "-"}
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                })
+                .join("");
+
+
+
+            updateStatistics(history);
+
+        }
+
+
+
+        /* =================================================
+           UPDATE DASHBOARD STATISTICS
+        ================================================== */
+
+        function updateStatistics(history) {
+
+
+            const total =
+                document.getElementById(
+                    "totalPredictions"
+                );
+
+
+            const normal =
+                document.getElementById(
+                    "normalMachines"
+                );
+
+
+            const failure =
+                document.getElementById(
+                    "failureRisk"
+                );
+
+
+            const average =
+                document.getElementById(
+                    "averageProbability"
+                );
+
+
+            if (!total ||
+                !normal ||
+                !failure ||
+                !average) {
+
+                return;
+
+            }
+
+
+
+            const totalCount =
+                history.length;
+
+
+            let normalCount = 0;
+
+            let failureCount = 0;
+
+            let probabilityTotal = 0;
+
+
+
+            history.forEach(function(item) {
+
+
+                const prediction =
+                    String(
+                        item.prediction || ""
+                    ).toLowerCase();
+
+
+                const probability =
+                    Number(
+                        item.probability || 0
+                    );
+
+
+                probabilityTotal +=
+                    probability;
+
+
+
+                if (
+                    prediction.includes("failure") ||
+                    prediction.includes("fail")
+                ) {
+
+                    failureCount++;
+
+                } else {
+
+                    normalCount++;
+
+                }
+
+            });
+
+
+
+            const averageRisk =
+                totalCount > 0
+                    ? probabilityTotal / totalCount
+                    : 0;
+
+
+
+            total.textContent =
+                totalCount;
+
+
+            normal.textContent =
+                normalCount;
+
+
+            failure.textContent =
+                failureCount;
+
+
+            average.textContent =
+                averageRisk.toFixed(1) + "%";
+
+        }
+
+
+
+        /* =================================================
+           CLEAR HISTORY
+        ================================================== */
+
+        function clearPredictionHistory() {
+
+
+            const history =
+                getPredictionHistory();
+
+
+            if (history.length === 0) {
+
+                return;
+
+            }
+
+
+            const confirmed =
+                confirm(
+                    "Are you sure you want to clear all prediction history?"
+                );
+
+
+            if (!confirmed) {
+
+                return;
+
+            }
+
+
+            localStorage.removeItem(
+                HISTORY_KEY
+            );
+
+
+            loadHistory();
+
+
+            updateStatistics([]);
+
+
+        }
+
+
+
+        /* =================================================
+           CREATE HISTORY RECORD
+        ================================================== */
+
+        function createHistoryRecord() {
+
+
+            const machineType =
+                document.getElementById(
+                    "machine_type"
+                );
+
+
+            const airTemperature =
+                document.getElementById(
+                    "air_temperature"
+                );
+
+
+            const processTemperature =
+                document.getElementById(
+                    "process_temperature"
+                );
+
+
+            const rotationalSpeed =
+                document.getElementById(
+                    "rotational_speed"
+                );
+
+
+            const torque =
+                document.getElementById(
+                    "torque"
+                );
+
+
+            const toolWear =
+                document.getElementById(
+                    "tool_wear"
+                );
+
+
+            const probabilityElement =
+                document.getElementById(
+                    "probability"
+                );
+
+
+            const resultBox =
+                document.getElementById(
+                    "resultBox"
+                );
+
+
+            if (
+                !machineType ||
+                !airTemperature ||
+                !processTemperature ||
+                !rotationalSpeed ||
+                !torque ||
+                !toolWear ||
+                !probabilityElement ||
+                !resultBox
+            ) {
+
+                return null;
+
+            }
+
+
+
+            /* Read probability */
+
+            const probabilityText =
+                probabilityElement
+                    .textContent
+                    .replace("%", "")
+                    .trim();
+
+
+            const probability =
+                parseFloat(
+                    probabilityText
+                );
+
+
+
+            if (
+                isNaN(probability)
+            ) {
+
+                return null;
+
+            }
+
+
+
+            /* Read prediction text */
+
+            const resultText =
+                resultBox
+                    .innerText
+                    .trim();
+
+
+            if (
+                !resultText ||
+                resultText
+                    .toLowerCase()
+                    .includes("ready for analysis")
+            ) {
+
+                return null;
+
+            }
+
+
+
+            let prediction =
+                resultText;
+
+
+
+            if (
+                resultText
+                    .toLowerCase()
+                    .includes("failure")
+            ) {
+
+                prediction =
+                    "MACHINE FAILURE";
+
+            } else if (
+                resultText
+                    .toLowerCase()
+                    .includes("normal")
+            ) {
+
+                prediction =
+                    "MACHINE NORMAL";
+
+            }
+
+
+
+            return {
+
+                machineType:
+                    machineType.value,
+
+                airTemperature:
+                    airTemperature.value,
+
+                processTemperature:
+                    processTemperature.value,
+
+                rotationalSpeed:
+                    rotationalSpeed.value,
+
+                torque:
+                    torque.value,
+
+                toolWear:
+                    toolWear.value,
+
+                prediction:
+                    prediction,
+
+                probability:
+                    probability,
+
+                date:
+                    new Date().toLocaleString()
+
+            };
+
+        }
+
+
+
+        /* =================================================
+           SAVE NEW PREDICTION
+           
+           MutationObserver watches the EXISTING result.
+           So script.js/API does not need to be rewritten.
+        ================================================== */
+
+        let lastSavedPrediction =
+            "";
+
+
+        function checkForNewPrediction() {
+
+
+            const probabilityElement =
+                document.getElementById(
+                    "probability"
+                );
+
+
+            const resultBox =
+                document.getElementById(
+                    "resultBox"
+                );
+
+
+            if (
+                !probabilityElement ||
+                !resultBox
+            ) {
+
+                return;
+
+            }
+
+
+
+            const probability =
+                probabilityElement
+                    .textContent
+                    .trim();
+
+
+            const result =
+                resultBox
+                    .innerText
+                    .trim();
+
+
+
+            if (
+                probability === "--%" ||
+                probability === "" ||
+                result === "" ||
+                result
+                    .toLowerCase()
+                    .includes("ready for analysis")
+            ) {
+
+                return;
+
+            }
+
+
+
+            const signature =
+                probability +
+                "|" +
+                result;
+
+
+
+            if (
+                signature ===
+                lastSavedPrediction
+            ) {
+
+                return;
+
+            }
+
+
+
+            const record =
+                createHistoryRecord();
+
+
+
+            if (!record) {
+
+                return;
+
+            }
+
+
+
+            lastSavedPrediction =
+                signature;
+
+
+
+            const history =
+                getPredictionHistory();
+
+
+
+            history.push(record);
+
+
+
+            /* Keep maximum 50 records */
+
+            if (history.length > 50) {
+
+                history.shift();
+
+            }
+
+
+
+            savePredictionHistory(
+                history
+            );
+
+
+            updateStatistics(
+                history
+            );
+
+
+            /* If History is currently open,
+               refresh table */
+
+            const section =
+                document.getElementById(
+                    "historySection"
+                );
+
+
+            if (
+                section &&
+                section.style.display !== "none"
+            ) {
+
+                loadHistory();
+
+            }
+
+        }
+
+
+
+        /* =================================================
+           WATCH EXISTING RESULT CARD
+        ================================================== */
+
+        window.addEventListener(
+            "load",
+            function () {
+
+
+                /* Load previous statistics */
+
+                const history =
+                    getPredictionHistory();
+
+
+                updateStatistics(
+                    history
+                );
+
+
+
+                /* Watch result changes */
+
+                const resultBox =
+                    document.getElementById(
+                        "resultBox"
+                    );
+
+
+                const probability =
+                    document.getElementById(
+                        "probability"
+                    );
+
+
+
+                if (
+                    resultBox &&
+                    probability
+                ) {
+
+
+                    const observer =
+                        new MutationObserver(
+                            function () {
+
+                                setTimeout(
+                                    checkForNewPrediction,
+                                    300
+                                );
+
+                            }
+                        );
+
+
+
+                    observer.observe(
+                        resultBox,
+                        {
+                            childList: true,
+                            subtree: true,
+                            characterData: true
+                        }
+                    );
+
+
+                    observer.observe(
+                        probability,
+                        {
+                            childList: true,
+                            subtree: true,
+                            characterData: true
+                        }
+                    );
+
+                }
+
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>

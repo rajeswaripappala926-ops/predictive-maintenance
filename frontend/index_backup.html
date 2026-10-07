@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Predictive Maintenance AI</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            ⚙️ Predictive<span>AI</span>
+        </div>
+
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            System Online
+        </div>
+    </nav>
+
+
+    <!-- Main Container -->
+    <main class="container">
+
+        <!-- Header -->
+        <section class="hero">
+            <div>
+                <p class="subtitle">AI-POWERED INDUSTRIAL MONITORING</p>
+
+                <h1>
+                    Predict Machine Failure
+                    <span>Before It Happens</span>
+                </h1>
+
+                <p class="description">
+                    Enter machine sensor values and let our AI model
+                    analyze the machine condition and predict possible failure risk.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- Dashboard -->
+        <section class="dashboard">
+
+            <!-- Input Card -->
+            <div class="card input-card">
+
+                <div class="card-header">
+                    <div>
+                        <p class="card-label">MACHINE INPUT</p>
+                        <h2>Sensor Parameters</h2>
+                    </div>
+
+                    <div class="icon-box">⚙️</div>
+                </div>
+
+
+                <form id="predictionForm">
+
+                    <!-- Machine Type -->
+                    <div class="input-group">
+                        <label for="machine_type">Machine Type</label>
+
+                        <select id="machine_type" required>
+                            <option value="">Select Type</option>
+                            <option value="L">L - Low</option>
+                            <option value="M">M - Medium</option>
+                            <option value="H">H - High</option>
+                        </select>
+                    </div>
+
+
+                    <!-- Air Temperature -->
+                    <div class="input-group">
+                        <label for="air_temperature">
+                            Air Temperature
+                            <span>[K]</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="air_temperature"
+                            placeholder="Example: 300"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Process Temperature -->
+                    <div class="input-group">
+                        <label for="process_temperature">
+                            Process Temperature
+                            <span>[K]</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="process_temperature"
+                            placeholder="Example: 310"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Rotational Speed -->
+                    <div class="input-group">
+                        <label for="rotational_speed">
+                            Rotational Speed
+                            <span>[RPM]</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="rotational_speed"
+                            placeholder="Example: 1500"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Torque -->
+                    <div class="input-group">
+                        <label for="torque">
+                            Torque
+                            <span>[Nm]</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="torque"
+                            placeholder="Example: 50"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Tool Wear -->
+                    <div class="input-group">
+                        <label for="tool_wear">
+                            Tool Wear
+                            <span>[min]</span>
+                        </label>
+
+                        <input
+                            type="number"
+                            id="tool_wear"
+                            placeholder="Example: 180"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Predict Button -->
+                    <button type="submit" class="predict-btn">
+                        <span>⚡</span>
+                        ANALYZE MACHINE
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- Result Card -->
+            <div class="card result-card">
+
+                <div class="card-header">
+                    <div>
+                        <p class="card-label">AI ANALYSIS</p>
+                        <h2>Prediction Result</h2>
+                    </div>
+
+                    <div class="icon-box">🤖</div>
+                </div>
+
+
+                <!-- Initial Result -->
+                <div id="resultBox" class="result-box">
+
+                    <div class="result-icon">
+                        🧠
+                    </div>
+
+                    <h3>Ready for Analysis</h3>
+
+                    <p>
+                        Enter the machine sensor values
+                        and click <strong>Analyze Machine</strong>.
+                    </p>
+
+                </div>
+
+
+                <!-- Probability -->
+                <div class="probability-section">
+
+                    <div class="probability-header">
+                        <span>Failure Probability</span>
+                        <strong id="probability">--%</strong>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div
+                            id="progress"
+                            class="progress"
+                            style="width: 0%">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- System Info -->
+                <div class="system-info">
+
+                    <div class="info-item">
+                        <span>MODEL</span>
+                        <strong>Random Forest</strong>
+                    </div>
+
+                    <div class="info-item">
+                        <span>DATABASE</span>
+                        <strong>MySQL</strong>
+                    </div>
+
+                    <div class="info-item">
+                        <span>API</span>
+                        <strong>FastAPI</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer>
+            <p>
+                Predictive Maintenance AI • Intelligent Industrial Monitoring System
+            </p>
+        </footer>
+
+    </main>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
