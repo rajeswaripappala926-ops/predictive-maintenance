@@ -110,7 +110,7 @@ form.addEventListener("submit", async function (event) {
         // Send data to FastAPI
 
         const response = await fetch(
-            "http://127.0.0.1:8000/predict",
+            "https://predictive-maintenance-ujcz.onrender.com/predict",
             {
                 method: "POST",
 
@@ -283,7 +283,7 @@ async function loadDashboardStats() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/dashboard"
+            "https://predictive-maintenance-ujcz.onrender.com/dashboard"
         );
 
 
@@ -336,7 +336,7 @@ async function loadPredictionHistory() {
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:8000/history"
+            "https://predictive-maintenance-ujcz.onrender.com/history"
         );
 
 
