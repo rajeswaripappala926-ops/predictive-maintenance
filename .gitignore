@@ -1,6 +1,39 @@
-﻿venv/
+﻿# Python virtual environment
+venv/
 .venv/
+
+# Python cache
 __pycache__/
-*.pyc
+*.py[cod]
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Environment variables / secrets
 .env
+.env.*
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
 *.log
+
+# Temporary files
+*.tmp
+
+# Python build files
+build/
+dist/
+*.egg-info/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+# Backup files
+frontend/dashboard_old.html

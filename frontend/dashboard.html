@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Predictive Maintenance AI</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f4f7fb;
+    color:#172033;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:240px;
+    background:#172033;
+    color:white;
+    padding:24px 15px;
+}
+
+.logo{
+    text-align:center;
+    padding-bottom:25px;
+    border-bottom:1px solid #354158;
+    margin-bottom:20px;
+}
+
+.logo-icon{font-size:34px}
+
+.logo h2{
+    margin:8px 0 5px;
+    font-size:19px;
+}
+
+.logo p{
+    margin:0;
+    color:#aeb7c7;
+    font-size:11px;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.menu button{
+    width:100%;
+    padding:14px 15px;
+    border:0;
+    border-radius:9px;
+    background:transparent;
+    color:#c7cfdb;
+    text-align:left;
+    font-size:14px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.menu button:hover{
+    background:#29354b;
+    color:white;
+}
+
+.menu button.active{
+    background:white;
+    color:#172033;
+}
+
+/* CONTENT */
+
+.content{
+    margin-left:240px;
+    min-height:100vh;
+}
+
+.header{
+    height:75px;
+    background:white;
+    border-bottom:1px solid #e2e7ee;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 35px;
+}
+
+.header h1{
+    margin:0;
+    font-size:22px;
+}
+
+.online{
+    background:#edf9f2;
+    color:#238653;
+    padding:9px 16px;
+    border-radius:20px;
+    font-size:13px;
+}
+
+.page{
+    display:none;
+    padding:35px;
+}
+
+.page.active{display:block}
+
+.title{
+    margin-bottom:28px;
+}
+
+.title h2{
+    margin:0;
+    font-size:28px;
+}
+
+.title p{
+    color:#748094;
+    margin-top:8px;
+}
+
+/* HOME */
+
+.welcome{
+    background:white;
+    padding:28px;
+    border-radius:16px;
+    border:1px solid #e2e7ee;
+    margin-bottom:25px;
+}
+
+.welcome h2{margin-top:0}
+
+.welcome p{
+    color:#707b8d;
+}
+
+.module-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.module{
+    background:white;
+    border:1px solid #e2e7ee;
+    border-radius:16px;
+    padding:25px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.module:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.module-icon{
+    font-size:30px;
+    margin-bottom:15px;
+}
+
+.module h3{margin:0 0 8px}
+
+.module p{
+    color:#737e90;
+    font-size:13px;
+    line-height:1.5;
+}
+
+/* SUMMARY */
+
+.summary{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.summary-card{
+    background:white;
+    border:1px solid #e2e7ee;
+    border-radius:14px;
+    padding:20px;
+}
+
+.summary-card span{
+    color:#788397;
+    font-size:12px;
+}
+
+.summary-card strong{
+    display:block;
+    font-size:27px;
+    margin-top:8px;
+}
+
+/* MACHINES */
+
+.machine-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.machine{
+    background:white;
+    border:1px solid #e2e7ee;
+    border-radius:16px;
+    padding:24px;
+    border-left:5px solid #27a86a;
+}
+
+.machine.warning-border{border-left-color:#e4a42d}
+.machine.critical-border{border-left-color:#dc4b4b}
+
+.machine-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.machine-top h3{margin:0}
+
+.badge{
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.green{
+    background:#edf9f2;
+    color:#238653;
+}
+
+.orange{
+    background:#fff5df;
+    color:#bd7b15;
+}
+
+.red{
+    background:#fff0f0;
+    color:#c63f3f;
+}
+
+.health-box{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin:22px 0;
+}
+
+.health-number{
+    font-size:38px;
+    font-weight:bold;
+}
+
+.health-label{
+    color:#788397;
+    font-size:12px;
+}
+
+.sensor{
+    display:flex;
+    justify-content:space-between;
+    padding:11px 0;
+    border-top:1px solid #edf0f4;
+    font-size:13px;
+}
+
+/* ANALYTICS */
+
+.analytics-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.analytics-card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    border:1px solid #e2e7ee;
+}
+
+.analytics-card span{
+    color:#788397;
+    font-size:13px;
+}
+
+.analytics-card strong{
+    display:block;
+    font-size:34px;
+    margin:12px 0;
+}
+
+.progress{
+    height:9px;
+    background:#edf0f4;
+    border-radius:10px;
+}
+
+.progress div{
+    height:100%;
+    background:#3b6df6;
+    border-radius:10px;
+}
+
+.chart{
+    background:white;
+    margin-top:22px;
+    padding:25px;
+    border-radius:15px;
+    border:1px solid #e2e7ee;
+}
+
+.bars{
+    height:220px;
+    display:flex;
+    align-items:end;
+    justify-content:space-around;
+    gap:15px;
+    padding-top:25px;
+}
+
+.bar{
+    width:45px;
+    background:#3b6df6;
+    border-radius:6px 6px 0 0;
+}
+
+/* ALERTS */
+
+.alert{
+    background:white;
+    padding:20px;
+    border-radius:14px;
+    margin-bottom:15px;
+    border-left:5px solid;
+}
+
+.alert.red-border{border-color:#dc4b4b}
+.alert.orange-border{border-color:#e4a42d}
+.alert.blue-border{border-color:#4776d8}
+
+.alert h3{margin:0}
+
+.alert p{
+    color:#737e90;
+    font-size:13px;
+    margin-bottom:0;
+}
+
+/* MAINTENANCE */
+
+.maintenance{
+    background:white;
+    padding:22px;
+    border:1px solid #e2e7ee;
+    border-radius:14px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.maintenance h3{margin:0 0 7px}
+
+.maintenance p{
+    margin:0;
+    color:#737e90;
+    font-size:13px;
+}
+
+.maintenance button,
+.report button{
+    background:#172033;
+    color:white;
+    border:0;
+    padding:11px 17px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* HISTORY */
+
+.history-box{
+    background:white;
+    border:1px solid #e2e7ee;
+    border-radius:15px;
+    padding:25px;
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:14px;
+    text-align:left;
+    border-bottom:1px solid #edf0f4;
+    font-size:13px;
+}
+
+th{color:#687386}
+
+/* REPORT */
+
+.report{
+    max-width:600px;
+    background:white;
+    border:1px solid #e2e7ee;
+    border-radius:16px;
+    padding:35px;
+}
+
+.report p{
+    color:#737e90;
+    line-height:1.6;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+
+    .sidebar{width:75px}
+
+    .logo h2,
+    .logo p,
+    .menu span{
+        display:none;
+    }
+
+    .menu button{
+        justify-content:center;
+    }
+
+    .content{
+        margin-left:75px;
+    }
+
+    .module-grid,
+    .summary,
+    .machine-grid,
+    .analytics-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <div class="logo-icon">⚙️</div>
+        <h2>Predictive AI</h2>
+        <p>Smart Factory</p>
+    </div>
+
+    <div class="menu">
+
+        <button class="active" onclick="showPage('home',this)">
+            🏠 <span>Dashboard</span>
+        </button>
+
+        <button onclick="openPrediction()">
+            🤖 <span>AI Prediction</span>
+        </button>
+
+        <button onclick="showPage('machines',this)">
+            🏭 <span>Machines</span>
+        </button>
+
+        <button onclick="showPage('analytics',this)">
+            📊 <span>Analytics</span>
+        </button>
+
+        <button onclick="showPage('alerts',this)">
+            🚨 <span>Alerts</span>
+        </button>
+
+        <button onclick="showPage('maintenance',this)">
+            🔧 <span>Maintenance</span>
+        </button>
+
+        <button onclick="showPage('history',this)">
+            📜 <span>History</span>
+        </button>
+
+        <button onclick="showPage('reports',this)">
+            📄 <span>Reports</span>
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="content">
+
+    <header class="header">
+
+        <h1 id="heading">Factory Dashboard</h1>
+
+        <div class="online">
+            🟢 System Online
+        </div>
+
+    </header>
+
+
+    <!-- DASHBOARD -->
+
+    <section id="home" class="page active">
+
+        <div class="title">
+
+            <h2>Factory Intelligence Dashboard</h2>
+
+            <p>
+                Monitor machines, predict failures and manage
+                maintenance from one system.
+            </p>
+
+        </div>
+
+
+        <div class="summary">
+
+            <div class="summary-card">
+                <span>Total Machines</span>
+                <strong>12</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>Healthy Machines</span>
+                <strong>9</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>Warning</span>
+                <strong>2</strong>
+            </div>
+
+            <div class="summary-card">
+                <span>Critical</span>
+                <strong>1</strong>
+            </div>
+
+        </div>
+
+
+        <div class="welcome">
+
+            <h2>Welcome 👋</h2>
+
+            <p>
+                Select any module from the left dashboard to
+                continue.
+            </p>
+
+        </div>
+
+
+        <div class="module-grid">
+
+            <div class="module" onclick="openPrediction()">
+                <div class="module-icon">🤖</div>
+                <h3>AI Prediction</h3>
+                <p>
+                    Enter machine sensor values and predict
+                    machine failure.
+                </p>
+            </div>
+
+            <div class="module" onclick="showPage('machines')">
+                <div class="module-icon">🏭</div>
+                <h3>Machine Monitoring</h3>
+                <p>
+                    View detailed machine health and sensor
+                    information.
+                </p>
+            </div>
+
+            <div class="module" onclick="showPage('analytics')">
+                <div class="module-icon">📊</div>
+                <h3>Analytics</h3>
+                <p>
+                    Analyze machine performance and trends.
+                </p>
+            </div>
+
+            <div class="module" onclick="showPage('alerts')">
+                <div class="module-icon">🚨</div>
+                <h3>Alerts</h3>
+                <p>
+                    View machines that need immediate attention.
+                </p>
+            </div>
+
+            <div class="module" onclick="showPage('maintenance')">
+                <div class="module-icon">🔧</div>
+                <h3>Maintenance</h3>
+                <p>
+                    Manage machine maintenance activities.
+                </p>
+            </div>
+
+            <div class="module" onclick="showPage('history')">
+                <div class="module-icon">📜</div>
+                <h3>Prediction History</h3>
+                <p>
+                    View previous machine prediction results.
+                </p>
+            </div>
+
+            <div class="module" onclick="showPage('reports')">
+                <div class="module-icon">📄</div>
+                <h3>Reports</h3>
+                <p>
+                    Generate predictive maintenance reports.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MACHINES -->
+
+    <section id="machines" class="page">
+
+        <div class="title">
+
+            <h2>🏭 Machine Monitoring</h2>
+
+            <p>
+                Detailed machine health and sensor information.
+            </p>
+
+        </div>
+
+
+        <div class="machine-grid">
+
+
+            <div class="machine">
+
+                <div class="machine-top">
+                    <h3>Machine M-001</h3>
+                    <span class="badge green">HEALTHY</span>
+                </div>
+
+                <div class="health-box">
+                    <div class="health-number">94%</div>
+                    <div class="health-label">
+                        Machine<br>Health Score
+                    </div>
+                </div>
+
+                <div class="sensor">
+                    <span>🌡 Air Temperature</span>
+                    <strong>300 K</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>🌡 Process Temperature</span>
+                    <strong>310 K</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>⚙ Rotational Speed</span>
+                    <strong>1500 rpm</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>🔩 Torque</span>
+                    <strong>50 Nm</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>🔧 Tool Wear</span>
+                    <strong>20 min</strong>
+                </div>
+
+            </div>
+
+
+            <div class="machine warning-border">
+
+                <div class="machine-top">
+                    <h3>Machine M-002</h3>
+                    <span class="badge orange">WARNING</span>
+                </div>
+
+                <div class="health-box">
+                    <div class="health-number">68%</div>
+                    <div class="health-label">
+                        Machine<br>Health Score
+                    </div>
+                </div>
+
+                <div class="sensor">
+                    <span>🌡 Air Temperature</span>
+                    <strong>306 K</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>🌡 Process Temperature</span>
+                    <strong>316 K</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>⚙ Rotational Speed</span>
+                    <strong>1750 rpm</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>🔩 Torque</span>
+                    <strong>62 Nm</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>🔧 Tool Wear</span>
+                    <strong>130 min</strong>
+                </div>
+
+            </div>
+
+
+            <div class="machine critical-border">
+
+                <div class="machine-top">
+                    <h3>Machine M-003</h3>
+                    <span class="badge red">CRITICAL</span>
+                </div>
+
+                <div class="health-box">
+                    <div class="health-number">31%</div>
+                    <div class="health-label">
+                        Machine<br>Health Score
+                    </div>
+                </div>
+
+                <div class="sensor">
+                    <span>🌡 Air Temperature</span>
+                    <strong>315 K</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>🌡 Process Temperature</span>
+                    <strong>325 K</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>⚙ Rotational Speed</span>
+                    <strong>1900 rpm</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>🔩 Torque</span>
+                    <strong>75 Nm</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>🔧 Tool Wear</span>
+                    <strong>220 min</strong>
+                </div>
+
+            </div>
+
+
+            <div class="machine">
+
+                <div class="machine-top">
+                    <h3>Machine M-004</h3>
+                    <span class="badge green">HEALTHY</span>
+                </div>
+
+                <div class="health-box">
+                    <div class="health-number">89%</div>
+                    <div class="health-label">
+                        Machine<br>Health Score
+                    </div>
+                </div>
+
+                <div class="sensor">
+                    <span>🌡 Air Temperature</span>
+                    <strong>301 K</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>🌡 Process Temperature</span>
+                    <strong>311 K</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>⚙ Rotational Speed</span>
+                    <strong>1480 rpm</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>🔩 Torque</span>
+                    <strong>48 Nm</strong>
+                </div>
+
+                <div class="sensor">
+                    <span>🔧 Tool Wear</span>
+                    <strong>35 min</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ANALYTICS -->
+
+    <section id="analytics" class="page">
+
+        <div class="title">
+
+            <h2>📊 Machine Analytics</h2>
+
+            <p>Machine performance and health insights.</p>
+
+        </div>
+
+
+        <div class="analytics-grid">
+
+            <div class="analytics-card">
+                <span>Average Machine Health</span>
+                <strong>82%</strong>
+
+                <div class="progress">
+                    <div style="width:82%"></div>
+                </div>
+            </div>
+
+            <div class="analytics-card">
+                <span>Failure Predictions</span>
+                <strong>14</strong>
+                <small>This month</small>
+            </div>
+
+            <div class="analytics-card">
+                <span>Downtime Reduction</span>
+                <strong>23%</strong>
+                <small>Estimated</small>
+            </div>
+
+        </div>
+
+
+        <div class="chart">
+
+            <h3>Machine Health Trend</h3>
+
+            <div class="bars">
+
+                <div class="bar" style="height:55%"></div>
+                <div class="bar" style="height:70%"></div>
+                <div class="bar" style="height:62%"></div>
+                <div class="bar" style="height:80%"></div>
+                <div class="bar" style="height:74%"></div>
+                <div class="bar" style="height:88%"></div>
+                <div class="bar" style="height:82%"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ALERTS -->
+
+    <section id="alerts" class="page">
+        <div class="title">
+    <h2>🚨 Machine Alerts</h2>
+    <p>Important machine warnings and notifications.</p>
+</div>
+
+        <div class="title">
+
+            <h2>🚨 Machine Alerts</h2>
+
+            <p>Important machine warnings and notifications.</p>
+
+        </div>
+
+<div id="latestAlertContainer"></div>
+        <div class="alert red-border">
+
+            <h3>🔴 Machine M-003 — Critical</h3>
+
+            <p>
+                High temperature, torque and tool wear detected.
+                Immediate maintenance inspection recommended.
+            </p>
+
+        </div>
+
+
+        <div class="alert orange-border">
+
+            <h3>🟠 Machine M-002 — Warning</h3>
+
+            <p>
+                Machine operating values are above the normal
+                operating range.
+            </p>
+
+        </div>
+
+
+        <div class="alert blue-border">
+
+            <h3>🔵 Machine M-004 — Maintenance Reminder</h3>
+
+            <p>
+                Routine maintenance is due for this machine.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- MAINTENANCE -->
+
+    <section id="maintenance" class="page">
+
+        <div class="title">
+
+            <h2>🔧 Maintenance Center</h2>
+
+            <p>Manage recommended machine maintenance.</p>
+
+        </div>
+<div id="latestMaintenanceContainer"></div>
+
+        <div class="maintenance">
+
+            <div>
+                <h3>Machine M-003</h3>
+                <p>
+                    Inspect cooling system and torque components.
+                </p>
+            </div>
+
+            <button onclick="schedule(this)">
+                Schedule
+            </button>
+
+        </div>
+
+
+        <div class="maintenance">
+
+            <div>
+                <h3>Machine M-002</h3>
+                <p>
+                    Check temperature sensor and lubrication.
+                </p>
+            </div>
+
+            <button onclick="schedule(this)">
+                Schedule
+            </button>
+
+        </div>
+
+
+        <div class="maintenance">
+
+            <div>
+                <h3>Machine M-004</h3>
+                <p>
+                    Perform routine inspection.
+                </p>
+            </div>
+
+            <button onclick="schedule(this)">
+                Schedule
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- HISTORY -->
+
+    <section id="history" class="page">
+
+        <div class="title">
+
+            <h2>📜 Prediction History</h2>
+
+            <p>Previous machine prediction results.</p>
+
+        </div>
+
+
+        <div class="history-box">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Machine</th>
+                        <th>Probability</th>
+                        <th>Prediction</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="historyTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- REPORTS -->
+
+    <section id="reports" class="page">
+
+        <div class="title">
+
+            <h2>📄 Reports Center</h2>
+
+            <p>Generate predictive maintenance reports.</p>
+
+        </div>
+
+
+        <div class="report">
+
+            <h2>Factory Maintenance Report</h2>
+
+            <p>
+                Generate a report containing machine health,
+                prediction information and maintenance status.
+            </p>
+
+            <button onclick="generateReport()">
+                Generate Report
+            </button>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+/* PAGE SWITCHING */
+
+function showPage(page,button){
+
+    document.querySelectorAll(".page")
+        .forEach(p=>p.classList.remove("active"));
+
+    document.getElementById(page)
+        .classList.add("active");
+
+    document.querySelectorAll(".menu button")
+        .forEach(b=>b.classList.remove("active"));
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    const names={
+        home:"Factory Dashboard",
+        machines:"Machine Monitoring",
+        analytics:"Machine Analytics",
+        alerts:"Machine Alerts",
+        maintenance:"Maintenance Center",
+        history:"Prediction History",
+        reports:"Reports Center"
+    };
+
+    document.getElementById("heading").innerText=names[page];
+
+    if(page==="history"){
+        loadHistory();
+    }
+}
+
+
+/* PREDICTION */
+
+function openPrediction(){
+
+    window.location.href="index.html";
+
+}
+
+
+/* MAINTENANCE */
+
+function schedule(button){
+
+    button.innerText="✓ Scheduled";
+    button.disabled=true;
+
+}
+
+
+/* HISTORY */
+
+function loadHistory(){
+
+    const table=document.getElementById("historyTable");
+
+    const history=JSON.parse(
+        localStorage.getItem("predictionHistory") || "[]"
+    );
+
+    table.innerHTML="";
+
+    if(history.length===0){
+
+        table.innerHTML=`
+        <tr>
+            <td colspan="4">
+                No prediction history yet.
+            </td>
+        </tr>`;
+
+        return;
+    }
+
+    history.slice().reverse().forEach(item=>{
+
+        const probability=
+            item.probability ??
+            item.failure_probability ??
+            item.failureProbability ??
+            0;
+
+        const result=
+            item.prediction ??
+            item.status ??
+            "Machine Normal";
+
+        const row=document.createElement("tr");
+
+        row.innerHTML=`
+            <td>${item.date || "Recent"}</td>
+            <td>Machine</td>
+            <td>${Number(probability).toFixed(2)}%</td>
+            <td>${result}</td>
+        `;
+
+        table.appendChild(row);
+
+    });
+}
+
+
+/* REPORT */
+
+function generateReport(){
+
+    const report=`
+PREDICTIVE MAINTENANCE AI
+=========================
+
+FACTORY MAINTENANCE REPORT
+
+Generated:
+${new Date().toLocaleString()}
+
+Total Machines: 12
+Healthy Machines: 9
+Warning Machines: 2
+Critical Machines: 1
+
+Generated by Predictive Maintenance AI
+`;
+
+    const blob=new Blob(
+        [report],
+        {type:"text/plain"}
+    );
+
+    const url=URL.createObjectURL(blob);
+
+    const link=document.createElement("a");
+
+    link.href=url;
+    link.download="Predictive_Maintenance_Report.txt";
+
+    link.click();
+
+    URL.revokeObjectURL(url);
+}
+
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const history = JSON.parse(localStorage.getItem("predictionHistory")) || [];
+
+    if (history.length === 0) {
+        return;
+    }
+
+    const latest = history[0];
+
+    // =========================
+    // LATEST ALERT
+    // =========================
+
+    const alertContainer = document.getElementById("latestAlertContainer");
+
+    if (alertContainer) {
+
+        let alertClass = "latest-low";
+        let alertTitle = "🟢 Machine Operating Normally";
+        let alertMessage = "Machine is operating normally. Continue regular monitoring.";
+
+        if (latest.risk_level === "MEDIUM") {
+            alertClass = "latest-medium";
+            alertTitle = "🟠 Machine Needs Attention";
+            alertMessage = "Machine requires attention. Maintenance should be scheduled soon.";
+        }
+
+        if (latest.risk_level === "HIGH") {
+            alertClass = "latest-high";
+            alertTitle = "🔴 Critical Machine Failure Risk";
+            alertMessage = "High failure risk detected. Immediate maintenance inspection is recommended.";
+        }
+
+        alertContainer.innerHTML = `
+            <div class="latest-analysis ${alertClass}">
+                <div class="latest-title">
+                    🚨 Latest AI Analysis
+                    <span class="latest-badge">${latest.risk_level} RISK</span>
+                </div>
+
+                <p><strong>Machine:</strong> ${latest.machine_type}</p>
+                <p><strong>Status:</strong> ${latest.status}</p>
+                <p><strong>Failure Probability:</strong> ${latest.failure_probability}%</p>
+                <p><strong>Analyzed:</strong> ${latest.timestamp}</p>
+
+                <p class="latest-message">
+                    ${alertTitle}
+                </p>
+
+                <p>${alertMessage}</p>
+            </div>
+        `;
+    }
+
+
+    // =========================
+    // LATEST MAINTENANCE
+    // =========================
+
+    const maintenanceContainer =
+        document.getElementById("latestMaintenanceContainer");
+
+    if (maintenanceContainer) {
+
+        let maintenanceTitle = "🔧 Routine Maintenance";
+        let maintenanceMessage =
+            "Machine condition is healthy. Continue monitoring.";
+
+        if (latest.risk_level === "MEDIUM") {
+            maintenanceTitle = "⚠️ Maintenance Recommended";
+            maintenanceMessage =
+                "Schedule maintenance soon and monitor machine parameters closely.";
+        }
+
+        if (latest.risk_level === "HIGH") {
+            maintenanceTitle = "🚨 Immediate Maintenance Required";
+            maintenanceMessage =
+                "Stop or inspect the machine immediately. High failure risk detected.";
+        }
+
+        maintenanceContainer.innerHTML = `
+            <div class="latest-analysis">
+                <div class="latest-title">
+                    ${maintenanceTitle}
+                </div>
+
+                <p><strong>Machine:</strong> ${latest.machine_type}</p>
+                <p><strong>Risk Level:</strong> ${latest.risk_level}</p>
+                <p><strong>Failure Probability:</strong> ${latest.failure_probability}%</p>
+
+                <p class="latest-message">
+                    ${maintenanceMessage}
+                </p>
+            </div>
+        `;
+    }
+
+});
+</script>
+</body>
+</html>
